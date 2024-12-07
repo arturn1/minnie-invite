@@ -19,8 +19,8 @@ const HomeScreen = ({ onNext }: { onNext: () => void }) => {
       setTimeout(() => {
         repositionButton(); // Reposiciona o botão
         setButtonVisible(true); // Faz o botão reaparecer
-      }, 1500); // Delay para reaparecer
-    }, 3000); // Intervalo entre os ciclos
+      }, 1000); // Delay para reaparecer
+    }, 500); // Intervalo entre os ciclos
 
     return () => clearInterval(interval);
   }, []);
@@ -66,7 +66,7 @@ const HomeScreen = ({ onNext }: { onNext: () => void }) => {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
         >
-          <b>Venha para a festa!</b>
+          Venha curtir um dia de piscina comigo para juntas celebrar meu aniversário!
         </Subtitle>
         <MinnieWrapper>
           <MinnieImage src="/images/minnie.png" alt="Minnie" />
@@ -209,8 +209,8 @@ const MinnieImage = styled.img`
 const OverlayText = styled.div<{ left?: boolean; right?: boolean }>`
   position: absolute;
   top: 20px;
-  ${({ left }) => left && "left: 0px;"}
-  ${({ right }) => right && "right: 0px;"}
+  ${({ left }) => left && "left: 20px;"}
+  ${({ right }) => right && "right: 20px;"}
   text-align: center;
 `;
 

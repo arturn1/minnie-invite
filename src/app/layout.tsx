@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Niver da Alicia",
-  description: "Convite de aniversario para o dia 22/12</br>Para mais informações: Artur Patrício",
+  description: "Convite de aniversario para o dia 22/12",
 };
 
 const bonbon = Bonbon({

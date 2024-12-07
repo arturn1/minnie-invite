@@ -43,13 +43,13 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
         <Section>
           <SectionTitle>Como chegar:</SectionTitle>
           <SectionText>
-            Este é um texto de exemplo com aproximadamente 100 caracteres para ilustrar a seção "Como chegar".
+            Entrar pelo Pesqueiro, subir a rua,.. etc, ou <a href="https://www.google.com/maps/place/rua conde de oriola 239">clique aqui!</a>
           </SectionText>
         </Section>
         <Section>
           <SectionTitle>Indicações:</SectionTitle>
           <SectionText>
-            Este é outro texto de exemplo com cerca de 100 caracteres, representando a seção "Indicações".
+            É desejável que tragam roupa de banho, para o "Parabéns" vestimenta com a temática Minnie.
           </SectionText>
         </Section>
         <Button onClick={handleConfirm}>Confirmar</Button>
