@@ -60,14 +60,15 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
   padding: 20px;
   text-align: center;
   background-color: #fff5f8;
-  height: 100vh;
-  overflow: hidden;
+  width: 100vw;
+  height: 100lvh
 `;
 
 const Content = styled.div`
@@ -79,13 +80,12 @@ const Title = styled.h1`
   font-size: 1.8rem;
   color: #f06292;
   z-index: 1;
-  margin-bottom: 20px;
 `;
 
 const ImageWrapper = styled.div`
   position: relative;
   display: inline-block;
-  margin: 20px 0;
+  margin: 10px 0;
 `;
 
 const Image = styled.img`
@@ -104,14 +104,14 @@ const Section = styled.div`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 1.4rem;
+  font-size: 1rem;
   color: #333;
   margin-bottom: 10px;
   font-family: 'Comic-Sans';
 `;
 
 const SectionText = styled.p`
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #555;
   font-family: 'Comic-Sans';
   line-height: 1.5;

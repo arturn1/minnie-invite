@@ -10,7 +10,6 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Arial', sans-serif;
     background-color: #fff5f8;
     color: #333;
-    overflow: hidden;
   }
 `;
 

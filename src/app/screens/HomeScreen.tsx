@@ -1,43 +1,41 @@
 import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 import Button from "../components/Button";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const HomeScreen = ({ onNext }: { onNext: () => void }) => {
-  const [buttonMoved, setButtonMoved] = useState(false);
-  const buttonWrapperRef = useRef<HTMLDivElement | null>(null);
-  const minnieWrapperRef = useRef<HTMLDivElement | null>(null);
+  const [buttonVisible, setButtonVisible] = useState(true);
+  const [buttonPosition, setButtonPosition] = useState({ top: "50%", left: "50%" });
+
+  const repositionButton = () => {
+    const randomTop = Math.random() * 80 + 10; // Entre 10% e 90% do viewport
+    const randomLeft = Math.random() * 80 + 10; // Entre 10% e 90% do viewport
+    setButtonPosition({ top: `${randomTop}%`, left: `${randomLeft}%` });
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setButtonVisible(false); // Faz o botão desaparecer
+      setTimeout(() => {
+        repositionButton(); // Reposiciona o botão
+        setButtonVisible(true); // Faz o botão reaparecer
+      }, 1500); // Delay para reaparecer
+    }, 3000); // Intervalo entre os ciclos
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleButtonClick = () => {
-    if (!buttonMoved) {
-      if (buttonWrapperRef.current && minnieWrapperRef.current) {
-        const minnieBounds = minnieWrapperRef.current.getBoundingClientRect();
-        const buttonWrapperBounds = buttonWrapperRef.current.getBoundingClientRect();
-
-        // Gera nova posição aleatória dentro dos limites visíveis
-        const randomTop = Math.max(
-          minnieBounds.bottom + 20, // Sempre abaixo da Minnie
-          Math.min(window.innerHeight - buttonWrapperBounds.height - 20, Math.random() * window.innerHeight)
-        );
-
-        const randomLeft = Math.max(
-          20, // Mínimo deslocamento da borda esquerda
-          Math.min(window.innerWidth - buttonWrapperBounds.width - 20, Math.random() * window.innerWidth)
-        );
-
-        buttonWrapperRef.current.style.top = `${randomTop}px`;
-        buttonWrapperRef.current.style.left = `${randomLeft}px`;
-      }
-      setButtonMoved(true);
-    } else {
-      onNext();
-    }
+    onNext();
   };
 
   return (
     <Container>
       <TopLine>
-        <MinnieLineImage src="/images/minnie.png" alt="Minnie" />
+        <Countdown>
+          {calculateTimeLeft().days}d {calculateTimeLeft().hours}h {calculateTimeLeft().minutes}m{" "}
+          {calculateTimeLeft().seconds}s
+        </Countdown>
       </TopLine>
       <Content>
         <Highlight>
@@ -70,7 +68,7 @@ const HomeScreen = ({ onNext }: { onNext: () => void }) => {
         >
           <b>Venha para a festa!</b>
         </Subtitle>
-        <MinnieWrapper ref={minnieWrapperRef}>
+        <MinnieWrapper>
           <MinnieImage src="/images/minnie.png" alt="Minnie" />
           <OverlayText left>
             <InfoTextHeader>22</InfoTextHeader>
@@ -81,30 +79,35 @@ const HomeScreen = ({ onNext }: { onNext: () => void }) => {
             <InfoText>Horas</InfoText>
           </OverlayText>
         </MinnieWrapper>
-        <ButtonWrapper
-          ref={buttonWrapperRef}
-          initial={!buttonMoved && { opacity: 1 }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{ duration: 0.5 }}
-        >
-          <Button
-            variant="pixel"
-            as={motion.button}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={handleButtonClick}
-          >
-            {buttonMoved ? "Tem certeza?" : "Quero ir!"}
-          </Button>
-        </ButtonWrapper>
+        {buttonVisible && (
+          <ButtonWrapper style={{ top: buttonPosition.top, left: buttonPosition.left }}>
+            <Button
+              variant="pixel"
+              as={motion.button}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={handleButtonClick}
+            >
+              Quero ir!
+            </Button>
+          </ButtonWrapper>
+        )}
       </Content>
-      <BottomLine>
-        <MinnieLineImage src="/images/minnie_2.png" alt="Minnie" />
-      </BottomLine>
     </Container>
   );
+};
+
+const calculateTimeLeft = () => {
+  const targetDate = new Date("2024-12-22T10:00:00");
+  const currentDate = new Date();
+  const difference = targetDate.getTime() - currentDate.getTime();
+
+  return {
+    days: Math.max(0, Math.floor(difference / (1000 * 60 * 60 * 24))),
+    hours: Math.max(0, Math.floor((difference / (1000 * 60 * 60)) % 24)),
+    minutes: Math.max(0, Math.floor((difference / 1000 / 60) % 60)),
+    seconds: Math.max(0, Math.floor((difference / 1000) % 60)),
+  };
 };
 
 const pulse = keyframes`
@@ -122,13 +125,13 @@ const pulse = keyframes`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  height: 100vh;
   background-color: #fff5f8;
   overflow: hidden;
   position: relative;
-  width: 100vw
+  width: 100vw;
+  height: 100lvh;
 `;
 
 const Line = styled.div`
@@ -143,33 +146,29 @@ const Line = styled.div`
 
 const TopLine = styled(Line)``;
 
-const BottomLine = styled(Line)``;
-
-const MinnieLineImage = styled.img`
-  height: 50px;
+const Countdown = styled.div`
+  font-size: 1.6rem;
+  color: white;
+  font-weight: bold;
 `;
 
 const Content = styled.div`
   z-index: 1;
   text-align: center;
-  margin: 0
 `;
 
-const Highlight = styled.div`
-`;
+const Highlight = styled.div``;
 
 const Name = styled(motion.h1)`
-  font-size: 7rem;
+  font-size: 6rem;
   color: #f06292;
   font-family: var(--font-bonbon), 'Arial', sans-serif;
-  margin: 0;
   animation: ${pulse} 2s infinite;
 `;
 
 const Age = styled.p`
-  font-size: 1.6rem;
+  font-size: 2.5rem;
   color: #555;
-  margin: 0 0 30px 0;
 `;
 
 const Title = styled.div`
@@ -179,19 +178,18 @@ const Title = styled.div`
   align-items: center;
   gap: 10px;
   padding: 0 20px;
-  margin-bottom: 20px;
 `;
 
 const Word = styled(motion.span)`
   font-size: 2rem;
   color: #f06292;
   font-family: var(--font-pacifico), 'Arial', sans-serif;
+  margin-bottom: 20px;
 `;
 
 const Subtitle = styled(motion.p)`
   font-size: 1.2rem;
   color: #555;
-  margin-bottom: 30px;
 `;
 
 const MinnieWrapper = styled.div`
@@ -205,14 +203,14 @@ const MinnieWrapper = styled.div`
 const MinnieImage = styled.img`
   width: 250px;
   height: 250px;
-  opacity: 0.4;
+  opacity: 0.2;
 `;
 
 const OverlayText = styled.div<{ left?: boolean; right?: boolean }>`
   position: absolute;
   top: 20px;
-  ${({ left }) => left && "left: 10px;"}
-  ${({ right }) => right && "right: 10px;"}
+  ${({ left }) => left && "left: 0px;"}
+  ${({ right }) => right && "right: 0px;"}
   text-align: center;
 `;
 
@@ -223,14 +221,14 @@ const InfoText = styled.p`
 `;
 
 const InfoTextHeader = styled.p`
-  font-size: 4.2rem;
+  font-size: 5.2rem;
   color: #555;
-  margin: 0;
+  margin-bottom: -25px;
 `;
 
 const ButtonWrapper = styled(motion.div)`
   position: absolute;
-  right: 150px
+  transition: top 0.5s ease, left 0.5s ease;
 `;
 
 export default HomeScreen;

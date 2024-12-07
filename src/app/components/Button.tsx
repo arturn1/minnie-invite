@@ -27,6 +27,7 @@ const MinniePixelButton = styled.button`
   overflow: hidden;
   transition: transform 0.2s, background-color 0.3s;
   z-index: 10;
+  font-family: 'Arial';
 
   &:hover {
     background-color: #ffc0cb; /* Rosa claro ao passar o mouse */

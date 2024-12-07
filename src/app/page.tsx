@@ -47,9 +47,9 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   overflow: hidden;
   background-color: #fff5f8;
+  width: 100vw
 `;
 
 export default MainApp;
