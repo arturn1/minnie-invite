@@ -20,7 +20,7 @@ const HomeScreen = ({ onNext }: { onNext: () => void }) => {
         repositionButton(); // Reposiciona o botão
         setButtonVisible(true); // Faz o botão reaparecer
       }, 1000); // Delay para reaparecer
-    }, 500); // Intervalo entre os ciclos
+    }, 1000); // Intervalo entre os ciclos
 
     return () => clearInterval(interval);
   }, []);
