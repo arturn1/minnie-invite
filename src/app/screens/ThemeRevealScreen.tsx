@@ -1,4 +1,3 @@
-// src/components/screens/ThemeRevealScreen.tsx
 import styled from "styled-components";
 import Button from "../components/Button";
 import Glow from "../components/Glow";
@@ -49,28 +48,20 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
         <ImageWrapper>
           <Image src="/images/minnie_2.png" alt="Tema Minnie" />
         </ImageWrapper>
-        <Section>
-          <SectionTitle>Como chegar:</SectionTitle>
-          <SectionText>
-            Entrar pelo Pesqueiro, subir a rua,.. etc, ou <a href="https://www.google.com/maps/place/rua conde de oriola 239">clique aqui!</a>
-          </SectionText>
-        </Section>
-        <Section>
-          <SectionTitle>Indicações:</SectionTitle>
-          <SectionText>
-            É desejável que tragam roupa de banho, para o "Parabéns" vestimenta com a temática Minnie.
-          </SectionText>
-        </Section>
-        <Section>
-          <SectionTitle>Presentes:</SectionTitle>
-          <SectionText>
-            <li>Roupas tamanho 06 ou 07</li>
-            <li>Calçados N26</li>
-            <li>Brinquedo</li>
-            <li>Toalhas</li>
-            <li>Perfume</li>
-          </SectionText>
-        </Section>
+        <CollapsibleSection title="Como chegar:">
+          Entrar pelo Pesqueiro, subir a rua,.. etc, ou{" "}
+          <a href="https://www.google.com/maps/place/rua conde de oriola 239">clique aqui!</a>
+        </CollapsibleSection>
+        <CollapsibleSection title="Indicações:">
+          É desejável que tragam roupa de banho, para o "Parabéns" vestimenta com a temática Minnie.
+        </CollapsibleSection>
+        <CollapsibleSection title="Presentes:">
+          <li>Roupas tamanho 06 ou 07</li>
+          <li>Calçados 26</li>
+          <li>Brinquedo</li>
+          <li>Toalhas</li>
+          <li>Perfume</li>
+        </CollapsibleSection>
         <Carousel images={images} />
         <Button onClick={handleConfirm}>Confirmar</Button>
       </Content>
@@ -78,6 +69,20 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
   );
 };
 
+const CollapsibleSection = ({ title, children }: { title: string; children: React.ReactNode }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Section>
+      <SectionTitle onClick={() => setIsOpen((prev) => !prev)} isOpen={isOpen}>
+        {title}
+      </SectionTitle>
+      {isOpen && <SectionText>{children}</SectionText>}
+    </Section>
+  );
+};
+
+// Styled Components
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -88,7 +93,6 @@ const Container = styled.div`
   text-align: center;
   background-color: #fff5f8;
   width: 100vw;
-  /* height: 100vh */
 `;
 
 const Content = styled.div`
@@ -103,7 +107,7 @@ const Title = styled.h1`
 `;
 
 const SubTitle = styled.p`
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: #555;
 `;
 
@@ -128,18 +132,32 @@ const Section = styled.div`
   max-width: 400px;
 `;
 
-const SectionTitle = styled.h2`
+const SectionTitle = styled.h2<{ isOpen: boolean }>`
   font-size: 1rem;
   color: #333;
   margin-bottom: 10px;
   font-family: 'Comic-Sans';
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  &:after {
+    content: "${(props) => (props.isOpen ? "-" : "+")}";
+    font-size: 1.2rem;
+    margin-left: 10px;
+    color: #f06292;
+  }
 `;
 
-const SectionText = styled.p`
+const SectionText = styled.div`
   font-size: 0.8rem;
   color: #555;
   font-family: 'Comic-Sans';
   line-height: 1.5;
+  padding-left: 10px;
+  border-left: 2px solid #f06292;
+  margin-top: 10px;
 `;
 
 export default ThemeRevealScreen;
