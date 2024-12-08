@@ -118,13 +118,13 @@ const Content = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 1.8rem;
+  font-size: 2.8rem;
   color: #f06292;
   z-index: 1;
 `;
 
 const SubTitle = styled.p`
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: #555;
 `;
 
@@ -150,7 +150,7 @@ const Section = styled.div`
 `;
 
 const SectionTitle = styled.h2<{ isOpen: boolean }>`
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #333;
   margin-bottom: 10px;
   font-family: 'Comic-Sans';
@@ -168,7 +168,7 @@ const SectionTitle = styled.h2<{ isOpen: boolean }>`
 `;
 
 const SectionText = styled.div`
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: #555;
   font-family: 'Comic-Sans';
   line-height: 1.5;
