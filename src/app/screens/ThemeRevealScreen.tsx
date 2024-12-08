@@ -107,7 +107,9 @@ const Container = styled.div`
   padding: 20px;
   text-align: center;
   background-color: #fff5f8;
-  width: 100vw
+  width: 100vw;
+  overflow-y: auto; /* Scroll se o conteúdo for maior que a tela */
+  overflow-x: hidden;
 `;
 
 const Content = styled.div`
