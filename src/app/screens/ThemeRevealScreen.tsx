@@ -85,7 +85,7 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
 };
 
 const CollapsibleSection = ({ title, children }: { title: string; children: React.ReactNode }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <Section>
