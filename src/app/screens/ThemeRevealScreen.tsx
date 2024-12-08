@@ -3,9 +3,17 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import Glow from "../components/Glow";
 import { useEffect, useState } from "react";
+import Carousel from "../components/Carousel";
 
 const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
   const [glows, setGlows] = useState<{ size: string; top: string; left: string }[]>([]);
+
+  const images = [
+    "/images/img_1.jpg",
+    "/images/img_2.jpg",
+    "/images/img_3.jpg",
+    "/images/img_4.jpg",
+  ];
 
   useEffect(() => {
     // Gera 10 elementos de Glow com tamanhos e posições aleatórios
@@ -35,8 +43,9 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
       ))}
 
       <Content>
-        <Title>Tema da Festa:</Title>
-        <Title>Minnie!</Title>
+        <Title>Pool Party!</Title>
+        <SubTitle>Festa da Piscina!</SubTitle>
+        <Title>Minnie</Title>
         <ImageWrapper>
           <Image src="/images/minnie_2.png" alt="Tema Minnie" />
         </ImageWrapper>
@@ -52,6 +61,17 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
             É desejável que tragam roupa de banho, para o "Parabéns" vestimenta com a temática Minnie.
           </SectionText>
         </Section>
+        <Section>
+          <SectionTitle>Presentes:</SectionTitle>
+          <SectionText>
+            <li>Roupas tamanho 06 ou 07</li>
+            <li>Calçados N26</li>
+            <li>Brinquedo</li>
+            <li>Toalhas</li>
+            <li>Perfume</li>
+          </SectionText>
+        </Section>
+        <Carousel images={images} />
         <Button onClick={handleConfirm}>Confirmar</Button>
       </Content>
     </Container>
@@ -68,7 +88,7 @@ const Container = styled.div`
   text-align: center;
   background-color: #fff5f8;
   width: 100vw;
-  height: 100lvh
+  /* height: 100vh */
 `;
 
 const Content = styled.div`
@@ -80,6 +100,11 @@ const Title = styled.h1`
   font-size: 1.8rem;
   color: #f06292;
   z-index: 1;
+`;
+
+const SubTitle = styled.p`
+  font-size: .8rem;
+  color: #555;
 `;
 
 const ImageWrapper = styled.div`
