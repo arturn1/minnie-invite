@@ -78,7 +78,7 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
           <li>Toalhas</li>
           <li>Perfumes</li>
         </CollapsibleSection>
-        <Carousel images={carouselImages} />
+     //   <Carousel images={carouselImages} />
         <Button onClick={handleConfirm}>Confirmar</Button>
       </Content>
     </Container>
