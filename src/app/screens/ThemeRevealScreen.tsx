@@ -6,23 +6,39 @@ import Carousel from "../components/Carousel";
 
 const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
   const [glows, setGlows] = useState<{ size: string; top: string; left: string }[]>([]);
+  const [randomImageIndex, setRandomImageIndex] = useState(0);
 
   const images = [
+    "/images/minnie_1.png",
+    "/images/minnie_2.png",
+    "/images/minnie_4.png",
+    "/images/minnie.png",
+    "/images/minnie_3.png",
+    "/images/mickey.png",
+  ];
+
+  const carouselImages = [
     "/images/img_1.jpg",
     "/images/img_2.jpg",
+    "/images/img_2.5.jpeg",
     "/images/img_3.jpg",
     "/images/img_4.jpg",
+    "/images/img_5.jpeg",
   ];
 
   useEffect(() => {
-    // Gera 10 elementos de Glow com tamanhos e posições aleatórios
+    // Gera um índice aleatório para exibir uma imagem aleatória no ImageWrapper
+    const randomIndex = Math.floor(Math.random() * images.length);
+    setRandomImageIndex(randomIndex);
+
+    // Gera elementos Glow
     const generatedGlows = Array.from({ length: 10 }, () => ({
       size: `${Math.random() * 200 + 50}px`, // Tamanho entre 50px e 250px
       top: `${Math.random() * 100}%`, // Posição vertical entre 0% e 100%
       left: `${Math.random() * 100}%`, // Posição horizontal entre 0% e 100%
     }));
     setGlows(generatedGlows);
-  }, []);
+  }, [images.length]);
 
   const handleConfirm = () => {
     // Envia mensagem via WhatsApp
@@ -46,23 +62,23 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
         <SubTitle>Festa da Piscina!</SubTitle>
         <Title>Minnie</Title>
         <ImageWrapper>
-          <Image src="/images/minnie_2.png" alt="Tema Minnie" />
+          <Image src={images[randomImageIndex]} alt="Tema Minnie" />
         </ImageWrapper>
         <CollapsibleSection title="Como chegar:">
           Entrar pelo Pesqueiro, subir a rua,.. etc, ou{" "}
           <a href="https://www.google.com/maps/place/rua conde de oriola 239">clique aqui!</a>
         </CollapsibleSection>
         <CollapsibleSection title="Indicações:">
-          É desejável que tragam roupa de banho, para o "Parabéns" a tematica será Minnie/Mickey.
+          É desejável que tragam roupa de banho, para o "Parabéns" a temática será Minnie/Mickey.
         </CollapsibleSection>
         <CollapsibleSection title="Presentes:">
           <li>Roupas: 06, 07</li>
-          <li>Calçados: 26</li>
-          <li>Brinquedo</li>
+          <li>Calçados: 28</li>
+          <li>Brinquedos</li>
           <li>Toalhas</li>
-          <li>Perfume</li>
+          <li>Perfumes</li>
         </CollapsibleSection>
-        <Carousel images={images} />
+        <Carousel images={carouselImages} />
         <Button onClick={handleConfirm}>Confirmar</Button>
       </Content>
     </Container>
@@ -129,7 +145,7 @@ const Section = styled.div`
   margin: 20px 0;
   text-align: left;
   z-index: 1000;
-  width: 100lvw
+  width: 100vw;
 `;
 
 const SectionTitle = styled.h2<{ isOpen: boolean }>`
