@@ -32,8 +32,8 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
     setRandomImageIndex(randomIndex);
 
     // Gera elementos Glow
-    const generatedGlows = Array.from({ length: 10 }, () => ({
-      size: `${Math.random() * 200 + 50}px`, // Tamanho entre 50px e 250px
+    const generatedGlows = Array.from({ length: 1 }, () => ({
+      size: `300px`, // Tamanho entre 50px e 250px
       top: `${Math.random() * 100}%`, // Posição vertical entre 0% e 100%
       left: `${Math.random() * 100}%`, // Posição horizontal entre 0% e 100%
     }));
@@ -52,10 +52,9 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <Container>
-      {/* Renderiza os elementos de Glow dinamicamente */}
-      {glows.map((glow, index) => (
+      {/* {glows.map((glow, index) => (
         <Glow key={index} size={glow.size} top={glow.top} left={glow.left} />
-      ))}
+      ))} */}
 
       <Content>
         <Title>Pool Party!</Title>
