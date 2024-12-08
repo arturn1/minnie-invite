@@ -53,11 +53,11 @@ const ThemeRevealScreen = ({ onNext }: { onNext: () => void }) => {
           <a href="https://www.google.com/maps/place/rua conde de oriola 239">clique aqui!</a>
         </CollapsibleSection>
         <CollapsibleSection title="Indicações:">
-          É desejável que tragam roupa de banho, para o "Parabéns" vestimenta com a temática Minnie.
+          É desejável que tragam roupa de banho, para o "Parabéns" a tematica será Minnie/Mickey.
         </CollapsibleSection>
         <CollapsibleSection title="Presentes:">
-          <li>Roupas tamanho 06 ou 07</li>
-          <li>Calçados 26</li>
+          <li>Roupas: 06, 07</li>
+          <li>Calçados: 26</li>
           <li>Brinquedo</li>
           <li>Toalhas</li>
           <li>Perfume</li>
@@ -125,11 +125,11 @@ const Image = styled.img`
 `;
 
 const Section = styled.div`
+  padding: 0 20px;
   margin: 20px 0;
   text-align: left;
-  width: 100%;
   z-index: 1000;
-  max-width: 400px;
+  width: 100lvw
 `;
 
 const SectionTitle = styled.h2<{ isOpen: boolean }>`
