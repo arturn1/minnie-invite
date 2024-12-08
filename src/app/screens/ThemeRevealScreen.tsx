@@ -108,6 +108,7 @@ const Container = styled.div`
   text-align: center;
   background-color: #fff5f8;
   width: 100vw;
+  height: 100lvh
 `;
 
 const Content = styled.div`
